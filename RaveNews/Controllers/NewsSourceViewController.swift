@@ -9,7 +9,7 @@ import UIKit
 import DZNEmptyDataSet
 import PromiseKit
 
-class NewsSourceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, PullToReach {
+class NewsSourceViewController: UIViewController, PullToReach {
     
     // MARK: - Outlets
     
@@ -29,29 +29,33 @@ class NewsSourceViewController: UIViewController, UITableViewDelegate, UITableVi
         return sourceTableView
     }
     
-    private lazy var categoryBarButton =
-        UIBarButtonItem(image: R.image.filter(),
-                        style: .plain,
-                        target: self,
-                        action: #selector(presentCategories))
+    private lazy var categoryBarButton = {
+        return UIBarButtonItem(image: R.image.filter(),
+                               style: .plain,
+                               target: self,
+                               action: #selector(presentCategories))
+    }()
     
-    private lazy var languageBarButton =
-        UIBarButtonItem(image: R.image.language(),
-                        style: .plain,
-                        target: self,
-                        action: #selector(presentNewsLanguages))
+    private lazy var languageBarButton = {
+        return UIBarButtonItem(image: R.image.language(),
+                               style: .plain,
+                               target: self,
+                               action: #selector(presentNewsLanguages))
+    }()
     
-    private lazy var countryBarButton =
-        UIBarButtonItem(image: R.image.country(),
-                        style: .plain,
-                        target: self,
-                        action: #selector(presentCountries))
+    private lazy var countryBarButton = {
+        return UIBarButtonItem(image: R.image.country(),
+                               style: .plain,
+                               target: self,
+                               action: #selector(presentCountries))
+    }()
     
-    private lazy var closeBarButton =
-        UIBarButtonItem(image: R.image.close(),
-                        style: .plain,
-                        target: self,
-                        action: #selector(dismissViewController))
+    private lazy var closeBarButton = {
+        return  UIBarButtonItem(image: R.image.close(),
+                                style: .plain,
+                                target: self,
+                                action: #selector(dismissViewController))
+    }()
     
     private var sourceItems: [DailySourceModel] = [] {
         didSet {
@@ -94,13 +98,13 @@ class NewsSourceViewController: UIViewController, UITableViewDelegate, UITableVi
         loadSourceData(sourceRequestParams: NewsSourceParameters())
         configurePullToReach()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         resultsSearchController.delegate = nil
         resultsSearchController.searchBar.delegate = nil
     }
-
+    
     // MARK: - Helper Methods
     
     private func prepareUI() {
@@ -135,7 +139,7 @@ class NewsSourceViewController: UIViewController, UITableViewDelegate, UITableVi
                                                    countryBarButton]
         self.activatePullToReach(on: navigationItem)
     }
-
+    
     private func setupSpinner(hidden: Bool) {
         DispatchQueue.main.async {
             self.spinningActivityIndicator.containerView.isHidden = hidden
@@ -146,92 +150,6 @@ class NewsSourceViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.spinningActivityIndicator.stop()
             }
         }
-    }
-    
-    deinit {
-        self.sourceTableView.delegate = nil
-        self.sourceTableView.dataSource = nil
-    }
-
-    // MARK: - Actions
-
-    @objc private func presentCategories() {
-        let categoryActivityVC = UIAlertController(title: "Select a Category",
-                                                   message: nil,
-                                                   preferredStyle: .actionSheet)
-
-        let cancelButton = UIAlertAction(title: "Cancel",
-                                         style: .cancel,
-                                         handler: nil)
-        
-        categoryActivityVC.addAction(cancelButton)
-
-        _ = categories.map {
-            let categoryButton = UIAlertAction(title: $0,
-                                               style: .default,
-                                               handler: { [weak self] action in
-                                                          guard let self else { return }
-                                                          if let category = action.title {
-                                                              let newsSourceParams = NewsSourceParameters(category: category)
-                                                              self.loadSourceData(sourceRequestParams: newsSourceParams)
-                                                          } })
-            
-            categoryActivityVC.addAction(categoryButton)
-        }
-    }
-    
-    @objc private func presentNewsLanguages() {
-        let languageActivityVC = UIAlertController(title: "Select a language",
-                                                   message: nil,
-                                                   preferredStyle: .actionSheet)
-        
-        let cancelButton = UIAlertAction(title: "Cancel",
-                                         style: .cancel,
-                                         handler: nil)
-
-        languageActivityVC.addAction(cancelButton)
-
-        for lang in languages {
-            let languageButton = UIAlertAction(title: lang.languageStringFromISOCode,
-                                               style: .default,
-                                               handler: { [weak self] _ in
-                                                          guard let self else { return }
-                                                          let newsSourceParams = NewsSourceParameters(language: lang)
-                                                          self.loadSourceData(sourceRequestParams: newsSourceParams) })
-            
-            languageActivityVC.addAction(languageButton)
-        }
-    }
-    
-    @objc private func presentCountries() {
-        let countriesActivityVC = UIAlertController(title: "Select a country",
-                                                   message: nil,
-                                                   preferredStyle: .actionSheet)
-        
-        let cancelButton = UIAlertAction(title: "Cancel",
-                                         style: .cancel,
-                                         handler: nil)
-        
-        countriesActivityVC.addAction(cancelButton)
-        
-        for country in countries {
-            let countryButton = UIAlertAction(title: country.formattedCountryDescription,
-                                              style: .default,
-                                              handler: { [weak self] _ in
-                                                         guard let self else { return }
-                                                         self.countryBarButton.image = nil
-                                                         self.countryBarButton.title = country.countryFlagFromCountryCode
-                                                         let newsSourceParams = NewsSourceParameters(country: country)
-                                                         self.loadSourceData(sourceRequestParams: newsSourceParams) })
-            
-            countriesActivityVC.addAction(countryButton)
-        }
-    }
-    
-    // MARK: - Actions
-    
-    @objc private func dismissViewController() {
-        self.performSegue(withIdentifier: "sourceUnwindSegue", sender: self)
     }
     
     private func loadSourceData(sourceRequestParams: NewsSourceParameters) {
@@ -258,8 +176,98 @@ class NewsSourceViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
+    
+    // MARK: - Deinitializers
+    
+    deinit {
+        self.sourceTableView.delegate = nil
+        self.sourceTableView.dataSource = nil
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func presentCategories() {
+        let categoryActivityVC = UIAlertController(title: "Select a Category",
+                                                   message: nil,
+                                                   preferredStyle: .actionSheet)
+        
+        let cancelButton = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        categoryActivityVC.addAction(cancelButton)
+        
+        _ = categories.map {
+            let categoryButton = UIAlertAction(title: $0,
+                                               style: .default,
+                                               handler: { [weak self] action in
+                guard let self else { return }
+                if let category = action.title {
+                    let newsSourceParams = NewsSourceParameters(category: category)
+                    self.loadSourceData(sourceRequestParams: newsSourceParams)
+                } })
+            
+            categoryActivityVC.addAction(categoryButton)
+        }
+    }
+    
+    @objc private func presentNewsLanguages() {
+        let languageActivityVC = UIAlertController(title: "Select a language",
+                                                   message: nil,
+                                                   preferredStyle: .actionSheet)
+        
+        let cancelButton = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        languageActivityVC.addAction(cancelButton)
+        
+        for lang in languages {
+            let languageButton = UIAlertAction(title: lang.languageStringFromISOCode,
+                                               style: .default,
+                                               handler: { [weak self] _ in
+                guard let self else { return }
+                let newsSourceParams = NewsSourceParameters(language: lang)
+                self.loadSourceData(sourceRequestParams: newsSourceParams) })
+            
+            languageActivityVC.addAction(languageButton)
+        }
+    }
+    
+    @objc private func presentCountries() {
+        let countriesActivityVC = UIAlertController(title: "Select a country",
+                                                    message: nil,
+                                                    preferredStyle: .actionSheet)
+        
+        let cancelButton = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        countriesActivityVC.addAction(cancelButton)
+        
+        for country in countries {
+            let countryButton = UIAlertAction(title: country.formattedCountryDescription,
+                                              style: .default,
+                                              handler: { [weak self] _ in
+                guard let self else { return }
+                self.countryBarButton.image = nil
+                self.countryBarButton.title = country.countryFlagFromCountryCode
+                let newsSourceParams = NewsSourceParameters(country: country)
+                self.loadSourceData(sourceRequestParams: newsSourceParams) })
+            
+            countriesActivityVC.addAction(countryButton)
+        }
+    }
+    
+    @objc private func dismissViewController() {
+        self.performSegue(withIdentifier: "sourceUnwindSegue", sender: self)
+    }
+}
 
-    // MARK: - TableView Delegate Methods
+// MARK: - UITableViewDataSource Methods
+    
+extension NewsSourceViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if resultsSearchController.isActive {
             return filteredSourceItems.count
@@ -267,34 +275,42 @@ class NewsSourceViewController: UIViewController, UITableViewDelegate, UITableVi
             return sourceItems.count
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.dailySourceItemCell,
                                                  for: indexPath)!
-
-        if self.resultsSearchController.isActive {
+        
+        if resultsSearchController.isActive {
             cell.sourceImageView.downloadedFromLink(NewsAPI.getSourceNewsLogoUrl(source: filteredSourceItems[indexPath.row].sid))
         } else {
             cell.sourceImageView.downloadedFromLink(NewsAPI.getSourceNewsLogoUrl(source: sourceItems[indexPath.row].sid))
         }
+        
         return cell
     }
+}
 
+// MARK: - UITableViewDelegate Methods
+
+extension NewsSourceViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if resultsSearchController.isActive {
             selectedItem = filteredSourceItems[indexPath.row]
         } else {
             selectedItem = sourceItems[indexPath.row]
         }
+        
         self.performSegue(withIdentifier: "sourceUnwindSegue",
                           sender: self)
     }
+}
     
-  
-    // MARK: - SearchBar Delegate
+// MARK: - UISearchResultsUpdating Delegate
 
+extension NewsSourceViewController: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
-
         filteredSourceItems.removeAll(keepingCapacity: false)
 
         if let searchString = searchController.searchBar.text {
