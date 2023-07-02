@@ -73,6 +73,8 @@ class DailyNewsController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
+    // MARK: - Helper Methods
 
     private func prepareUI() {
         configureNavigationBar()
@@ -174,6 +176,7 @@ class DailyNewsController: UIViewController {
 }
 
 extension DailyNewsController {
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
@@ -225,6 +228,7 @@ extension DailyNewsController: UICollectionViewDataSource, UICollectionViewDeleg
                                  didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         collectionView.performBatchUpdates(nil, completion: nil)
+        
         if let cell = collectionView.cellForItem(at: indexPath) {
             selectedCell = cell
             self.performSegue(withIdentifier: R.segue.dailyNewsController.newsDetailSegue,
@@ -277,9 +281,10 @@ extension DailyNewsController: UICollectionViewDragDelegate {
         let dragPreviewParameters = UIDragPreviewParameters()
         if let cell = collectionView.cellForItem(at: indexPath) {
             dragPreviewParameters.backgroundColor = UIColor.white
-            dragPreviewParameters.visiblePath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius)
-            
+            dragPreviewParameters.visiblePath = UIBezierPath(roundedRect:cell.bounds,
+                                                             cornerRadius:cell.contentView.layer.cornerRadius)
         }
+        
         return dragPreviewParameters
     }
     

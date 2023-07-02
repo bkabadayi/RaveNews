@@ -18,6 +18,10 @@ class NewsDetailViewController: UIViewController, SFSafariViewControllerDelegate
     private var articleStringURL: String?
     var receivedItemNumber: Int?
     var isLanguageRightToLeftDetailView: Bool = false
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     // MARK: - Outlets
     
@@ -112,8 +116,8 @@ class NewsDetailViewController: UIViewController, SFSafariViewControllerDelegate
         }
     }
 
+    // MARK: - Lifecycle Methods
     
-    // MARK: - View Controller Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -153,62 +157,46 @@ class NewsDetailViewController: UIViewController, SFSafariViewControllerDelegate
                                      self.contentTextView.alpha = 1.0 })
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-    }
+    // MARK: - Helper Methods
     
-    // MARK: - Status Bar Color
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    private func fadeUIElements(with alpha: CGFloat) {
+       UIView.animate(withDuration: 0.1) {
+           self.backButton.alpha = alpha
+           self.shareButton.alpha = alpha
+           self.swipeLeftButton.alpha = alpha
+       }
+   }
+    
+    func captureScreenShot() -> UIImage? {
+       let bounds = UIScreen.main.bounds
+       UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
+       self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
+       let image = UIGraphicsGetImageFromCurrentImageContext()
+       UIGraphicsEndImageContext()
 
-    // MARK: - Back Button Dismiss action
-    @IBAction func dismissButtonTapped() {
+       return image
+   }
+
+    // MARK: - Actions
+    
+    @IBAction private func dismissButtonTapped() {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Back dismiss swipe
-    @IBAction func swipeToDismiss(_ sender: UISwipeGestureRecognizer) {
+    @IBAction private func swipeToDismiss(_ sender: UISwipeGestureRecognizer) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - share article
-    @IBAction func shareArticle(_ sender: UIButton) {
+    @IBAction private func shareArticle(_ sender: UIButton) {
         fadeUIElements(with: 0.0)
-
     }
 
-    // Helper to toggle UI elements before and after screenshot capture
-     func fadeUIElements(with alpha: CGFloat) {
-        UIView.animate(withDuration: 0.1) {
-            self.backButton.alpha = alpha
-            self.shareButton.alpha = alpha
-            self.swipeLeftButton.alpha = alpha
-        }
-    }
-
-    // Helper method to generate article screenshots
-     func captureScreenShot() -> UIImage? {
-        //Create the UIImage
-        let bounds = UIScreen.main.bounds
-        UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
-        self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return image
-
-    }
-
-    @IBAction func openArticleInSafari(_ sender: UIButton) {
-        openInSafari()
-    }
-    
-    func openInSafari() {
+    @IBAction private func openArticleInSafari(_ sender: UIButton) {
         
     }
 }
+
+// MARK: - UIDragInteractionDelegate Methods
 
 @available(iOS 11.0, *)
 extension NewsDetailViewController: UIDragInteractionDelegate {
@@ -219,6 +207,85 @@ extension NewsDetailViewController: UIDragInteractionDelegate {
         let item = UIDragItem(itemProvider: provider)
         return [item]
     }
-    
 }
 
+// MARK: - UIStateRestoring Methods
+
+extension NewsDetailViewController {
+
+    override func encodeRestorableState(with coder: NSCoder) {
+        if let newsImage = newsImageView.image {
+            coder.encode(newsImage.jpegData(compressionQuality: 1.0),
+                         forKey:"newsImage")
+        }
+        
+        if let title = newsTitleLabel.text {
+            coder.encode(title,
+                         forKey: "title")
+        }
+        
+        if let contentText = contentTextView.text {
+            coder.encode(contentText,
+                         forKey: "contentText")
+        }
+        
+        if let newsAuthor = newsAuthorLabel.text {
+            coder.encode(newsAuthor,
+                         forKey: "newsAuthor")
+        }
+        
+        if let publishedDate = receivedNewsItem?.publishedAt {
+            coder.encode(publishedDate,
+                         forKey: "publishedDate")
+        }
+        
+        if let url = self.articleStringURL {
+            coder.encode(url,
+                         forKey: "newsURL")
+        }
+        
+        if let newsSource = newsSourceLabel.text {
+            coder.encode(newsSource,
+                         forKey: "newsSource")
+        }
+        
+        super.encodeRestorableState(with: coder)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        if let newsImageData = coder.decodeObject(forKey: "newsImage") as? Data {
+            newsImageView.image = UIImage(data: newsImageData)
+        }
+        
+        if let title = coder.decodeObject(forKey: "title") as? String {
+            newsTitleLabel.text = title
+        }
+        
+        if let contentText = coder.decodeObject(forKey: "contentText") as? String {
+            contentTextView.text = contentText
+        }
+        
+        if let newsAuthorText = coder.decodeObject(forKey: "newsAuthor") as? String {
+            newsAuthorLabel.text = newsAuthorText
+        }
+        
+        if let publishedAtDate = coder.decodeObject(forKey: "publishedDate") as? String {
+            guard let publishedDate = publishedAtDate.dateFromTimestamp?.relativelyFormatted(short: false) else {
+                return swipeLeftButton.setTitle("Read More...",
+                                                for: .normal)
+            }
+            swipeLeftButton.setTitle("\(publishedDate) • Read More...",
+                                     for: .normal)
+        }
+        
+        if let urlString = coder.decodeObject(forKey: "newsURL") as? String {
+            articleStringURL = urlString
+        }
+        
+        if let newsSource = coder.decodeObject(forKey: "newsSource") as? String {
+            newsSourceLabel.text = newsSource
+        }
+        
+        super.decodeRestorableState(with: coder)
+    }
+}
