@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import MobileCoreServices
+import UniformTypeIdentifiers
 
 // MARK: - Enums
 
-enum DailyFeedModelUTI {
+enum DailyNewsModelUTI {
     static let kUUTTypeDailyFeedModel = "kUUTTypeDailyFeedModel"
 }
 
@@ -26,7 +26,7 @@ struct Articles: Codable {
     var articles: [DailyNewsModel]
 }
 
-final class DailyNewsModel: NSObject, Codable {
+final class DailyNewsModel: NSObject, Serializable {
     
     // MARK: - Variables
     
@@ -44,3 +44,41 @@ final class DailyNewsModel: NSObject, Codable {
         case title, author, publishedAt, urlToImage, url
     }
 }
+
+extension DailyNewsModel: NSItemProviderWriting {
+    
+    static var writableTypeIdentifiersForItemProvider: [String] = [DailyNewsModelUTI.kUUTTypeDailyFeedModel, UTType.utf8PlainText.identifier as String]
+    
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        if typeIdentifier == DailyNewsModelUTI.kUUTTypeDailyFeedModel {
+            completionHandler(self.serialize(), nil)
+        } else if typeIdentifier == UTType.utf8PlainText.identifier {
+            completionHandler(self.url?.data(using: .utf8), nil)
+        } else {
+            completionHandler(nil, DailyFeedModelError.invalidDailyFeedModel)
+        }
+        return nil
+    }
+}
+
+extension DailyNewsModel: NSItemProviderReading {
+    
+    static var readableTypeIdentifiersForItemProvider: [String] {
+        return [DailyNewsModelUTI.kUUTTypeDailyFeedModel]
+    }
+    
+    static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> DailyNewsModel {
+        if typeIdentifier == DailyNewsModelUTI.kUUTTypeDailyFeedModel {
+            let dfm = DailyNewsModel()
+            do {
+                let dailyFeedModel = try dfm.deserialize(data: data)
+                return dailyFeedModel
+            } catch {
+                throw DailyFeedModelError.invalidDailyFeedModel
+            }
+        } else {
+            throw DailyFeedModelError.invalidTypeIdentifier
+        }
+    }
+}
+
