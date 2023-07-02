@@ -1,0 +1,6 @@
+framework module Pods_RaveNews {
+  umbrella header "Pods-RaveNews-umbrella.h"
+
+  export *
+  module * { export * }
+}
