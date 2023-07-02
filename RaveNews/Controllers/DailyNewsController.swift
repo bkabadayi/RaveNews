@@ -152,8 +152,8 @@ class DailyNewsController: UIViewController {
     }
 
     @objc private func sourceMenuButtonDidTap() {
-        self.performSegue(withIdentifier: "",
-                          sender: self)
+//        self.performSegue(withIdentifier: R.segue.dailyFeedNewsController.newsSourceSegue,
+//                          sender: self)
     }
     
     // MARK: - Data Passing
@@ -202,7 +202,7 @@ extension DailyNewsController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     }
 
     func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-        return nil
+        return R.image.placeholder()
     }
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
@@ -241,8 +241,8 @@ extension DailyNewsController: UICollectionViewDataSource, UICollectionViewDeleg
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let gridCell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.dailyNewsItemCell,
-                                                          for: indexPath)
-        return gridCell!
+                                                          for: indexPath)!
+        return gridCell
     }
     
     func collectionView(_ collectionView: UICollectionView,

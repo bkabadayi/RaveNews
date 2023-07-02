@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--DailyFeed-->
+        <!--DailyNews-->
         <scene sceneID="92n-ux-5T0">
             <objects>
                 <viewController id="QIA-7v-0pK" customClass="DailyNewsController" customModule="RaveNews" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,15 +64,16 @@
                             <constraint firstAttribute="trailing" secondItem="ufd-df-NJm" secondAttribute="trailing" id="sub-u0-ekl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="DailyFeed" largeTitleDisplayMode="always" id="eGL-z4-fgX"/>
+                    <navigationItem key="navigationItem" title="DailyNews" largeTitleDisplayMode="always" id="eGL-z4-fgX"/>
                     <connections>
                         <outlet property="newsCollectionView" destination="ufd-df-NJm" id="Xja-Eu-3HW"/>
                         <segue destination="1yk-sL-YYJ" kind="presentation" identifier="newsDetailSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="uhP-41-mqj"/>
+                        <segue destination="Agd-lC-jjR" kind="show" identifier="newsSourceSegue" id="2B0-cB-MgT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bPz-nt-a5c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3294.375" y="434.15492957746477"/>
+            <point key="canvasLocation" x="2134" y="434"/>
         </scene>
         <!--News Detail View Controller-->
         <scene sceneID="215-4y-uX3">
@@ -263,7 +264,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4680" y="464.78873239436621"/>
+            <point key="canvasLocation" x="2942" y="435"/>
         </scene>
         <!--DailyFeed-->
         <scene sceneID="loe-6Q-P3R">
@@ -304,10 +305,99 @@
             </objects>
             <point key="canvasLocation" x="506" y="436"/>
         </scene>
+        <!--Sources-->
+        <scene sceneID="coH-vu-UYS">
+            <objects>
+                <viewController storyboardIdentifier="NewsSourceViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yRo-cy-JI3" customClass="NewsSourceViewController" customModule="DailyFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OdK-Mj-hep">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jaw-oV-OrD">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SourceCell" rowHeight="60" id="Z82-NM-xup">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z82-NM-xup" id="uNs-FJ-oLT">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="yRo-cy-JI3" id="C7e-NH-FCk"/>
+                                    <outlet property="delegate" destination="yRo-cy-JI3" id="GNu-H0-32G"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vUO-zm-ZXv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Jaw-oV-OrD" secondAttribute="bottom" id="bAQ-Oa-o0P"/>
+                            <constraint firstAttribute="trailing" secondItem="Jaw-oV-OrD" secondAttribute="trailing" id="dFn-tB-JAI"/>
+                            <constraint firstItem="Jaw-oV-OrD" firstAttribute="top" secondItem="vUO-zm-ZXv" secondAttribute="top" id="fY1-ef-Fy7"/>
+                            <constraint firstItem="Jaw-oV-OrD" firstAttribute="leading" secondItem="OdK-Mj-hep" secondAttribute="leading" id="zka-Gd-dyh"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Sources" id="06U-JP-Ycz">
+                        <rightBarButtonItems>
+                            <barButtonItem image="search" style="plain" id="hWo-xq-EJh">
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </barButtonItem>
+                            <barButtonItem image="filter" id="Swb-wA-lh8">
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </barButtonItem>
+                            <barButtonItem image="language" id="3A0-eG-aP5">
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </barButtonItem>
+                            <barButtonItem image="country" id="Rko-y4-CBk" userLabel="Country Button">
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="sourceTableView" destination="Jaw-oV-OrD" id="gLY-RF-lWI"/>
+                        <segue destination="EFX-pY-8WS" kind="unwind" identifier="sourceUnwindSegue" unwindAction="unwindToDailyNewsFeed:" id="V5x-i6-iko"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="40d-EP-sC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EFX-pY-8WS" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2942" y="1309"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="izw-1P-7C8">
+            <objects>
+                <navigationController storyboardIdentifier="SourceNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Agd-lC-jjR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="HZX-ok-FmC"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="2w8-o4-lNo">
+                        <rect key="frame" x="0.0" y="20" width="320" height="92.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.69999998807907104" contentMode="scaleToFill" id="R9C-vw-Dx9">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="yRo-cy-JI3" kind="relationship" relationship="rootViewController" id="bNK-Hr-sjm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TsO-d4-tEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2134" y="1309"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back" width="36" height="36"/>
+        <image name="country" width="24" height="24"/>
+        <image name="filter" width="24" height="24"/>
+        <image name="language" width="24" height="24"/>
         <image name="logo" width="24" height="24"/>
+        <image name="search" width="24" height="24"/>
         <image name="share" width="24" height="24"/>
         <namedColor name="detailLabelColor">
             <color red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
