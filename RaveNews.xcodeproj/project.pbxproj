@@ -21,6 +21,7 @@
 		5A3ED82A2A5254C100DB04B1 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED8292A5254C100DB04B1 /* BookmarkViewController.swift */; };
 		5A3ED82C2A52563100DB04B1 /* BookmarkItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A3ED82B2A52563100DB04B1 /* BookmarkItemsCell.xib */; };
 		5A3ED82E2A52564900DB04B1 /* BookmarkItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED82D2A52564900DB04B1 /* BookmarkItemsCell.swift */; };
+		5A3ED8302A525B7400DB04B1 /* LottieIconTransitions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A3ED82F2A525B7400DB04B1 /* LottieIconTransitions.json */; };
 		5AD3A1962A51DB5A001E4CDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */; };
 		5AD3A19F2A51DB5B001E4CDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */; };
 		5AD3A1B92A51E009001E4CDD /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD3A1B82A51E009001E4CDD /* PromiseKit */; };
@@ -70,6 +71,7 @@
 		5A3ED8292A5254C100DB04B1 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		5A3ED82B2A52563100DB04B1 /* BookmarkItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkItemsCell.xib; sourceTree = "<group>"; };
 		5A3ED82D2A52564900DB04B1 /* BookmarkItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkItemsCell.swift; sourceTree = "<group>"; };
+		5A3ED82F2A525B7400DB04B1 /* LottieIconTransitions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieIconTransitions.json; sourceTree = "<group>"; };
 		5AD3A1922A51DB5A001E4CDD /* RaveNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				5AD3A1C92A51EE65001E4CDD /* Storyboards */,
 				5AD3A1B02A51DCF5001E4CDD /* Views */,
 				5AD3A1D72A51F3B6001E4CDD /* Helpers */,
+				5A3ED82F2A525B7400DB04B1 /* LottieIconTransitions.json */,
 				5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */,
 				5AD3A1A32A51DB5B001E4CDD /* Info.plist */,
 			);
@@ -391,6 +394,7 @@
 				5AD3A2052A521E7F001E4CDD /* DailyNewsItemCell.xib in Resources */,
 				5AD3A19F2A51DB5B001E4CDD /* Assets.xcassets in Resources */,
 				5A3ED7F22A52364F00DB04B1 /* DailySourceItemCell.xib in Resources */,
+				5A3ED8302A525B7400DB04B1 /* LottieIconTransitions.json in Resources */,
 				5A3ED82C2A52563100DB04B1 /* BookmarkItemsCell.xib in Resources */,
 				5AD3A1CE2A51EFE2001E4CDD /* LaunchScreen.storyboard in Resources */,
 			);
