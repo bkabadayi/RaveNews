@@ -21,13 +21,13 @@ class DailyNewsController: UIViewController {
     }
     
     // MARK: - Constants
-    
-    private static let sourceName: String = "DailyNews"
 
     private let spinningActivityIndicator: RaveSpinnerView = .init()
     private let refreshControl: UIRefreshControl = .init()
 
     // MARK: - Variables
+    
+    private var sourceName: String = "DailyNews"
     
     private var newsItems: [DailyNewsModel] = [] {
         didSet {
@@ -47,7 +47,8 @@ class DailyNewsController: UIViewController {
         }
 
         set {
-           UserDefaults(suiteName: "group.com.sapio.today")?.set(newValue, forKey: "source")
+           UserDefaults(suiteName: "group.com.sapio.today")?.set(newValue,
+                                                                 forKey: "source")
         }
     }
 
@@ -82,21 +83,26 @@ class DailyNewsController: UIViewController {
     }
 
     private func configureNavigationBar() {
-        let sourceMenuButton = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(sourceMenuButtonDidTap))
-        navigationItem.rightBarButtonItem = sourceMenuButton
-        navigationItem.title = Self.sourceName
+        let sourceMenuButton = UIBarButtonItem(image: R.image.sources(),
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(sourceMenuButtonDidTap))
+        
+        self.navigationItem.rightBarButtonItem = sourceMenuButton
+        self.navigationItem.title = sourceName
     }
 
     private func configureCollectionView() {
         newsCollectionView.register(R.nib.dailyNewsItemCell)
         newsCollectionView.collectionViewLayout = DailySourceItemLayout()
         newsCollectionView.refreshControl = refreshControl
+        newsCollectionView.emptyDataSetDelegate = self
+        newsCollectionView.emptyDataSetSource = self
+        
         refreshControl.addTarget(self,
                                  action: #selector(refreshData(_:)),
-                                 for: UIControl.Event.valueChanged)
-        newsCollectionView?.emptyDataSetDelegate = self
-        newsCollectionView?.emptyDataSetSource = self
-
+                                 for: .valueChanged)
+        
         if #available(iOS 11.0, *) {
             newsCollectionView.dragDelegate = self
             newsCollectionView.dragInteractionEnabled = true
@@ -128,7 +134,7 @@ class DailyNewsController: UIViewController {
                 NewsAPI.getNewsItems(source: source)
             }.done { result in
                 self.newsItems = result.articles
-                self.navigationItem.title = Self.sourceName
+                self.navigationItem.title = self.sourceName
             }.ensure(on: .main) {
                 self.spinningActivityIndicator.stop()
                 self.refreshControl.endRefreshing()
@@ -152,8 +158,8 @@ class DailyNewsController: UIViewController {
     }
 
     @objc private func sourceMenuButtonDidTap() {
-//        self.performSegue(withIdentifier: R.segue.dailyFeedNewsController.newsSourceSegue,
-//                          sender: self)
+        self.performSegue(withIdentifier: R.segue.dailyNewsController.newsSourceSegue,
+                          sender: self)
     }
     
     // MARK: - Data Passing
@@ -168,8 +174,28 @@ class DailyNewsController: UIViewController {
                 vc.modalPresentationStyle = .fullScreen
                 vc.receivedNewsItem = DailyNewsRealmModel.toDailyNewsRealmModel(from: newsItems[indexpath.row])
                 vc.receivedItemNumber = indexpath.row + 1
-                vc.receivedNewsSource = Self.sourceName
+                vc.receivedNewsSource = sourceName
                 vc.isLanguageRightToLeftDetailView = isLanguageRightToLeft
+            }
+        }
+    }
+    
+    @IBAction func unwindToDailyNewsFeed(_ segue: UIStoryboardSegue) {
+        if let sourceVC = segue.source as? NewsSourceViewController,
+            let selectedItem = sourceVC.selectedItem {
+            let sourceId = selectedItem.sid
+            sourceName = selectedItem.name
+            let status = Reach().connectionStatus()
+            isLanguageRightToLeft = sourceVC.selectedItem?.isoLanguageCode.direction == .rightToLeft
+            
+            switch status {
+            case .unknown, .offline:
+                self.showErrorWithDelay("Your Internet Connection appears to be offline.")
+                break
+            case .online(.wwan), .online(.wiFi):
+                source = sourceId
+                loadNewsData(source)
+                break
             }
         }
     }
@@ -218,14 +244,20 @@ extension DailyNewsController: UICollectionViewDataSource, UICollectionViewDeleg
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                                 numberOfItemsInSection section: Int) -> Int {
-
-            return self.newsItems.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return newsItems.count
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                                 didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let gridCell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.dailyNewsItemCell,
+                                                          for: indexPath)!
+        
+        gridCell.configure(with: newsItems[indexPath.row], ltr: isLanguageRightToLeft)
+        
+        return gridCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         collectionView.performBatchUpdates(nil, completion: nil)
         
@@ -234,20 +266,9 @@ extension DailyNewsController: UICollectionViewDataSource, UICollectionViewDeleg
             self.performSegue(withIdentifier: R.segue.dailyNewsController.newsDetailSegue,
                               sender: cell)
         }
-
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let gridCell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.dailyNewsItemCell,
-                                                          for: indexPath)!
-        return gridCell
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                                 viewForSupplementaryElementOfKind kind: String,
-                                 at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                          withReuseIdentifier: R.reuseIdentifier.newsFooterView.identifier,
@@ -256,9 +277,7 @@ extension DailyNewsController: UICollectionViewDataSource, UICollectionViewDeleg
         return footerView
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForFooterInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
             return CGSize(width: collectionView.bounds.width,
                           height: collectionView.bounds.height / 10)
     }
@@ -279,6 +298,7 @@ extension DailyNewsController: UICollectionViewDragDelegate {
     
     func collectionView(_ collectionView: UICollectionView, dragPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
         let dragPreviewParameters = UIDragPreviewParameters()
+        
         if let cell = collectionView.cellForItem(at: indexPath) {
             dragPreviewParameters.backgroundColor = UIColor.white
             dragPreviewParameters.visiblePath = UIBezierPath(roundedRect:cell.bounds,

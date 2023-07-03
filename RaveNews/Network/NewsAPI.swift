@@ -65,7 +65,6 @@ enum NewsAPI {
             session.dataTask(with: baseUrlRequest) { (data, response, error) in
                 
                 guard error == nil else { seal.reject(error!); return }
-                
                 guard let data = data else { seal.reject(error!); return }
                 
                 do {

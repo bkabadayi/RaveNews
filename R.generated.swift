@@ -18,7 +18,6 @@ struct _R {
 
   var color: color { .init(bundle: bundle) }
   var image: image { .init(bundle: bundle) }
-  var info: info { .init(bundle: bundle) }
   var nib: nib { .init(bundle: bundle) }
   var storyboard: storyboard { .init(bundle: bundle) }
 
@@ -26,9 +25,6 @@ struct _R {
     .init(bundle: bundle)
   }
   func image(bundle: Foundation.Bundle) -> image {
-    .init(bundle: bundle)
-  }
-  func info(bundle: Foundation.Bundle) -> info {
     .init(bundle: bundle)
   }
   func nib(bundle: Foundation.Bundle) -> nib {
@@ -46,9 +42,12 @@ struct _R {
     let developmentRegion = "en"
   }
 
-  /// This `_R.color` struct is generated, and contains static references to 1 colors.
+  /// This `_R.color` struct is generated, and contains static references to 2 colors.
   struct color {
     let bundle: Foundation.Bundle
+
+    /// Color `AccentColor`.
+    var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
 
     /// Color `detailLabelColor`.
     var detailLabelColor: RswiftResources.ColorResource { .init(name: "detailLabelColor", path: [], bundle: bundle) }
@@ -98,58 +97,10 @@ struct _R {
     var sources: RswiftResources.ImageResource { .init(name: "sources", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.info` struct is generated, and contains static references to 1 properties.
-  struct info {
-    let bundle: Foundation.Bundle
-    var uiApplicationSceneManifest: uiApplicationSceneManifest { .init(bundle: bundle) }
-
-    func uiApplicationSceneManifest(bundle: Foundation.Bundle) -> uiApplicationSceneManifest {
-      .init(bundle: bundle)
-    }
-
-    struct uiApplicationSceneManifest {
-      let bundle: Foundation.Bundle
-
-      let uiApplicationSupportsMultipleScenes: Bool = false
-
-      var _key: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest"], key: "_key") ?? "UIApplicationSceneManifest" }
-      var uiSceneConfigurations: uiSceneConfigurations { .init(bundle: bundle) }
-
-      func uiSceneConfigurations(bundle: Foundation.Bundle) -> uiSceneConfigurations {
-        .init(bundle: bundle)
-      }
-
-      struct uiSceneConfigurations {
-        let bundle: Foundation.Bundle
-        var _key: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations"], key: "_key") ?? "UISceneConfigurations" }
-        var uiWindowSceneSessionRoleApplication: uiWindowSceneSessionRoleApplication { .init(bundle: bundle) }
-
-        func uiWindowSceneSessionRoleApplication(bundle: Foundation.Bundle) -> uiWindowSceneSessionRoleApplication {
-          .init(bundle: bundle)
-        }
-
-        struct uiWindowSceneSessionRoleApplication {
-          let bundle: Foundation.Bundle
-          var defaultConfiguration: defaultConfiguration { .init(bundle: bundle) }
-
-          func defaultConfiguration(bundle: Foundation.Bundle) -> defaultConfiguration {
-            .init(bundle: bundle)
-          }
-
-          struct defaultConfiguration {
-            let bundle: Foundation.Bundle
-            var uiSceneConfigurationName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneConfigurationName") ?? "Default Configuration" }
-            var uiSceneDelegateClassName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneDelegateClassName") ?? "$(PRODUCT_MODULE_NAME).SceneDelegate" }
-            var uiSceneStoryboardFile: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneStoryboardFile") ?? "Main" }
-          }
-        }
-      }
-    }
-  }
-
-  /// This `_R.segue` struct is generated, and contains static references to 2 view controllers.
+  /// This `_R.segue` struct is generated, and contains static references to 3 view controllers.
   struct segue {
     let dailyNewsController = dailyNewsController()
+    let newsSearchViewController = newsSearchViewController()
     let newsSourceViewController = newsSourceViewController()
 
     /// This struct is generated for `DailyNewsController`, and contains static references to 2 segues.
@@ -160,6 +111,13 @@ struct _R {
 
       /// Segue identifier `newsSourceSegue`.
       var newsSourceSegue: RswiftResources.SegueIdentifier<UIKit.UIStoryboardSegue, DailyNewsController, UIKit.UINavigationController> { .init(identifier: "newsSourceSegue") }
+    }
+
+    /// This struct is generated for `NewsSearchViewController`, and contains static references to 1 segues.
+    struct newsSearchViewController {
+
+      /// Segue identifier `newsSearchSegue`.
+      var newsSearchSegue: RswiftResources.SegueIdentifier<UIKit.UIStoryboardSegue, NewsSearchViewController, NewsDetailViewController> { .init(identifier: "newsSearchSegue") }
     }
 
     /// This struct is generated for `NewsSourceViewController`, and contains static references to 1 segues.

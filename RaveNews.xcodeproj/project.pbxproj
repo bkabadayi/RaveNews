@@ -15,8 +15,8 @@
 		5A3ED7FF2A52376F00DB04B1 /* PullToReachObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED7F92A52376F00DB04B1 /* PullToReachObserver.swift */; };
 		5A3ED8002A52376F00DB04B1 /* PullToReach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED7FA2A52376F00DB04B1 /* PullToReach.swift */; };
 		5A3ED8012A52376F00DB04B1 /* SelectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED7FB2A52376F00DB04B1 /* SelectionIndicatorView.swift */; };
+		5A3ED8032A523D4400DB04B1 /* NewsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED8022A523D4400DB04B1 /* NewsSearchViewController.swift */; };
 		5AD3A1962A51DB5A001E4CDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */; };
-		5AD3A1982A51DB5A001E4CDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD3A1972A51DB5A001E4CDD /* SceneDelegate.swift */; };
 		5AD3A19F2A51DB5B001E4CDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */; };
 		5AD3A1B92A51E009001E4CDD /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD3A1B82A51E009001E4CDD /* PromiseKit */; };
 		5AD3A1BC2A51E028001E4CDD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD3A1BB2A51E028001E4CDD /* Kingfisher */; };
@@ -59,9 +59,9 @@
 		5A3ED7F92A52376F00DB04B1 /* PullToReachObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToReachObserver.swift; sourceTree = "<group>"; };
 		5A3ED7FA2A52376F00DB04B1 /* PullToReach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToReach.swift; sourceTree = "<group>"; };
 		5A3ED7FB2A52376F00DB04B1 /* SelectionIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionIndicatorView.swift; sourceTree = "<group>"; };
+		5A3ED8022A523D4400DB04B1 /* NewsSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSearchViewController.swift; sourceTree = "<group>"; };
 		5AD3A1922A51DB5A001E4CDD /* RaveNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5AD3A1972A51DB5A001E4CDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AD3A1A32A51DB5B001E4CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD3A1CB2A51EFE2001E4CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -179,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */,
-				5AD3A1972A51DB5A001E4CDD /* SceneDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -236,6 +235,7 @@
 				5AD3A1E72A520662001E4CDD /* DailyNewsController.swift */,
 				5AD3A1ED2A520F82001E4CDD /* NewsDetailViewController.swift */,
 				5A3ED7EF2A5230E900DB04B1 /* NewsSourceViewController.swift */,
+				5A3ED8022A523D4400DB04B1 /* NewsSearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -455,12 +455,12 @@
 				5A3ED7FD2A52376F00DB04B1 /* UIView+Helper.swift in Sources */,
 				5AD3A1E82A520662001E4CDD /* DailyNewsController.swift in Sources */,
 				5AD3A1D32A51F0CC001E4CDD /* DailySourceItemLayout.swift in Sources */,
-				5AD3A1982A51DB5A001E4CDD /* SceneDelegate.swift in Sources */,
 				5A3ED7FF2A52376F00DB04B1 /* PullToReachObserver.swift in Sources */,
 				5AD3A1E02A51F743001E4CDD /* DailyNewsRealmModel.swift in Sources */,
 				5A3ED8002A52376F00DB04B1 /* PullToReach.swift in Sources */,
 				5AD3A2032A521E73001E4CDD /* DailyNewsItemCell.swift in Sources */,
 				5AD3A1F82A5214BC001E4CDD /* DecodingErrorExtension.swift in Sources */,
+				5A3ED8032A523D4400DB04B1 /* NewsSearchViewController.swift in Sources */,
 				5AD3A1FE2A52166F001E4CDD /* UIImageExtension.swift in Sources */,
 				5A3ED8012A52376F00DB04B1 /* SelectionIndicatorView.swift in Sources */,
 				5AD3A1DC2A51F474001E4CDD /* DailyNewsModel.swift in Sources */,
