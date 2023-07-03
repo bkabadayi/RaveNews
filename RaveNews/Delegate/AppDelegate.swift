@@ -14,13 +14,15 @@ import CoreSpotlight
     var window: UIWindow?
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
         window?.makeKeyAndVisible()
+        
         return true
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let _ = try! Realm()
+        _ = try! Realm()
         
         if #available(iOS 13.0, *) {
             window?.tintColor = .label
@@ -28,10 +30,9 @@ import CoreSpotlight
             window?.tintColor = .black
         }
         
-        
-        
         return true
     }
+    
     func applicationWillResignActive(_ application: UIApplication) {
 
     }
