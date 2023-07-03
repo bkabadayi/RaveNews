@@ -133,7 +133,7 @@ class NewsSearchViewController: UIViewController {
     // MARK: - Data Passing
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "R.segue.newsSearchViewController.newsSearchSegue.identifier" {
+        if segue.identifier == R.segue.newsSearchViewController.newsSearchSegue.identifier {
             if let vc = segue.destination as? NewsDetailViewController {
                 guard let cell = sender as? UICollectionViewCell else { return }
                 guard let indexpath = self.searchCollectionView?.indexPath(for: cell) else { return }
