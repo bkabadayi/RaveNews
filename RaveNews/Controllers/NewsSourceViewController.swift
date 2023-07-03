@@ -201,14 +201,19 @@ class NewsSourceViewController: UIViewController, PullToReach {
             let categoryButton = UIAlertAction(title: $0,
                                                style: .default,
                                                handler: { [weak self] action in
-                guard let self else { return }
-                if let category = action.title {
-                    let newsSourceParams = NewsSourceParameters(category: category)
-                    self.loadSourceData(sourceRequestParams: newsSourceParams)
-                } })
+                                                          guard let self else { return }
+                                                          
+                                                          if let category = action.title {
+                                                              let newsSourceParams = NewsSourceParameters(category: category)
+                                                              self.loadSourceData(sourceRequestParams: newsSourceParams)
+                                                          } })
             
             categoryActivityVC.addAction(categoryButton)
         }
+        
+        self.present(categoryActivityVC,
+                     animated: true,
+                     completion: nil)
     }
     
     @objc private func presentNewsLanguages() {
@@ -226,12 +231,17 @@ class NewsSourceViewController: UIViewController, PullToReach {
             let languageButton = UIAlertAction(title: lang.languageStringFromISOCode,
                                                style: .default,
                                                handler: { [weak self] _ in
-                guard let self else { return }
-                let newsSourceParams = NewsSourceParameters(language: lang)
-                self.loadSourceData(sourceRequestParams: newsSourceParams) })
+                                                          guard let self else { return }
+                                                          
+                                                          let newsSourceParams = NewsSourceParameters(language: lang)
+                                                          self.loadSourceData(sourceRequestParams: newsSourceParams) })
             
             languageActivityVC.addAction(languageButton)
         }
+        
+        self.present(languageActivityVC,
+                     animated: true,
+                     completion: nil)
     }
     
     @objc private func presentCountries() {
@@ -249,14 +259,19 @@ class NewsSourceViewController: UIViewController, PullToReach {
             let countryButton = UIAlertAction(title: country.formattedCountryDescription,
                                               style: .default,
                                               handler: { [weak self] _ in
-                guard let self else { return }
-                self.countryBarButton.image = nil
-                self.countryBarButton.title = country.countryFlagFromCountryCode
-                let newsSourceParams = NewsSourceParameters(country: country)
-                self.loadSourceData(sourceRequestParams: newsSourceParams) })
+                                                         guard let self else { return }
+                                                         
+                                                         self.countryBarButton.image = nil
+                                                         self.countryBarButton.title = country.countryFlagFromCountryCode
+                                                         let newsSourceParams = NewsSourceParameters(country: country)
+                                                         self.loadSourceData(sourceRequestParams: newsSourceParams) })
             
             countriesActivityVC.addAction(countryButton)
         }
+        
+        self.present(countriesActivityVC,
+                     animated: true,
+                     completion: nil)
     }
     
     @objc private func dismissViewController() {

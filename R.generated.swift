@@ -97,11 +97,19 @@ struct _R {
     var sources: RswiftResources.ImageResource { .init(name: "sources", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.segue` struct is generated, and contains static references to 3 view controllers.
+  /// This `_R.segue` struct is generated, and contains static references to 4 view controllers.
   struct segue {
+    let bookmarkViewController = bookmarkViewController()
     let dailyNewsController = dailyNewsController()
     let newsSearchViewController = newsSearchViewController()
     let newsSourceViewController = newsSourceViewController()
+
+    /// This struct is generated for `BookmarkViewController`, and contains static references to 1 segues.
+    struct bookmarkViewController {
+
+      /// Segue identifier `bookmarkSourceSegue`.
+      var bookmarkSourceSegue: RswiftResources.SegueIdentifier<UIKit.UIStoryboardSegue, BookmarkViewController, NewsDetailViewController> { .init(identifier: "bookmarkSourceSegue") }
+    }
 
     /// This struct is generated for `DailyNewsController`, and contains static references to 2 segues.
     struct dailyNewsController {
@@ -128,9 +136,12 @@ struct _R {
     }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 2 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 3 nibs.
   struct nib {
     let bundle: Foundation.Bundle
+
+    /// Nib `BookmarkItemsCell`.
+    var bookmarkItemsCell: RswiftResources.NibReferenceReuseIdentifier<BookmarkItemsCell, BookmarkItemsCell> { .init(name: "BookmarkItemsCell", bundle: bundle, identifier: "BookmarkItemsCell") }
 
     /// Nib `DailyNewsItemCell`.
     var dailyNewsItemCell: RswiftResources.NibReferenceReuseIdentifier<DailyNewsItemCell, DailyNewsItemCell> { .init(name: "DailyNewsItemCell", bundle: bundle, identifier: "DailyNewsItemCell") }
@@ -139,12 +150,15 @@ struct _R {
     var dailySourceItemCell: RswiftResources.NibReferenceReuseIdentifier<DailySourceItemCell, DailySourceItemCell> { .init(name: "DailySourceItemCell", bundle: bundle, identifier: "DailySourceItemCell") }
 
     func validate() throws {
-
+      if UIKit.UIImage(named: "delete", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'delete' is used in nib 'BookmarkItemsCell', but couldn't be loaded.") }
     }
   }
 
-  /// This `_R.reuseIdentifier` struct is generated, and contains static references to 4 reuse identifiers.
+  /// This `_R.reuseIdentifier` struct is generated, and contains static references to 5 reuse identifiers.
   struct reuseIdentifier {
+
+    /// Reuse identifier `BookmarkItemsCell`.
+    let bookmarkItemsCell: RswiftResources.ReuseIdentifier<BookmarkItemsCell> = .init(identifier: "BookmarkItemsCell")
 
     /// Reuse identifier `DailyNewsItemCell`.
     let dailyNewsItemCell: RswiftResources.ReuseIdentifier<DailyNewsItemCell> = .init(identifier: "DailyNewsItemCell")
@@ -197,6 +211,7 @@ struct _R {
 
       let name = "Main"
 
+      var bookmarkViewController: RswiftResources.StoryboardViewControllerIdentifier<BookmarkViewController> { .init(identifier: "BookmarkViewController", storyboard: name, bundle: bundle) }
       var initialNavigationController: RswiftResources.StoryboardViewControllerIdentifier<UIKit.UINavigationController> { .init(identifier: "InitialNavigationController", storyboard: name, bundle: bundle) }
       var mainTabBarController: RswiftResources.StoryboardViewControllerIdentifier<UIKit.UITabBarController> { .init(identifier: "MainTabBarController", storyboard: name, bundle: bundle) }
       var newsDetailViewController: RswiftResources.StoryboardViewControllerIdentifier<NewsDetailViewController> { .init(identifier: "NewsDetailViewController", storyboard: name, bundle: bundle) }
@@ -205,6 +220,7 @@ struct _R {
 
       func validate() throws {
         if UIKit.UIImage(named: "back", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'back' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "bookmark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'bookmark' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "country", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'country' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "filter", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'filter' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "language", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'language' is used in storyboard 'Main', but couldn't be loaded.") }
@@ -212,6 +228,7 @@ struct _R {
         if UIKit.UIImage(named: "search", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'search' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "share", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'share' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIColor(named: "detailLabelColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'detailLabelColor' is used in storyboard 'Main', but couldn't be loaded.") }
+        if bookmarkViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'bookmarkViewController' could not be loaded from storyboard 'Main' as 'BookmarkViewController'.") }
         if initialNavigationController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'initialNavigationController' could not be loaded from storyboard 'Main' as 'UIKit.UINavigationController'.") }
         if mainTabBarController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'mainTabBarController' could not be loaded from storyboard 'Main' as 'UIKit.UITabBarController'.") }
         if newsDetailViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'newsDetailViewController' could not be loaded from storyboard 'Main' as 'NewsDetailViewController'.") }

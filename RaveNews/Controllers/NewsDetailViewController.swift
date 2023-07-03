@@ -220,6 +220,10 @@ class NewsDetailViewController: UIViewController, SFSafariViewControllerDelegate
                 
                 self.fadeUIElements(with: 1.0)
             }
+            
+            self.present(activityVC,
+                         animated: true,
+                         completion: nil)
         }
     }
 

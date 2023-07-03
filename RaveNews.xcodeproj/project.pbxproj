@@ -18,6 +18,9 @@
 		5A3ED8032A523D4400DB04B1 /* NewsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED8022A523D4400DB04B1 /* NewsSearchViewController.swift */; };
 		5A3ED8252A52529C00DB04B1 /* DFSafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED8242A52529C00DB04B1 /* DFSafariViewController.swift */; };
 		5A3ED8282A5253E100DB04B1 /* BookmarkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED8272A5253E100DB04B1 /* BookmarkActivity.swift */; };
+		5A3ED82A2A5254C100DB04B1 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED8292A5254C100DB04B1 /* BookmarkViewController.swift */; };
+		5A3ED82C2A52563100DB04B1 /* BookmarkItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A3ED82B2A52563100DB04B1 /* BookmarkItemsCell.xib */; };
+		5A3ED82E2A52564900DB04B1 /* BookmarkItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED82D2A52564900DB04B1 /* BookmarkItemsCell.swift */; };
 		5AD3A1962A51DB5A001E4CDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */; };
 		5AD3A19F2A51DB5B001E4CDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */; };
 		5AD3A1B92A51E009001E4CDD /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD3A1B82A51E009001E4CDD /* PromiseKit */; };
@@ -64,6 +67,9 @@
 		5A3ED8022A523D4400DB04B1 /* NewsSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSearchViewController.swift; sourceTree = "<group>"; };
 		5A3ED8242A52529C00DB04B1 /* DFSafariViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFSafariViewController.swift; sourceTree = "<group>"; };
 		5A3ED8272A5253E100DB04B1 /* BookmarkActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkActivity.swift; sourceTree = "<group>"; };
+		5A3ED8292A5254C100DB04B1 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		5A3ED82B2A52563100DB04B1 /* BookmarkItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkItemsCell.xib; sourceTree = "<group>"; };
+		5A3ED82D2A52564900DB04B1 /* BookmarkItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkItemsCell.swift; sourceTree = "<group>"; };
 		5AD3A1922A51DB5A001E4CDD /* RaveNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -250,6 +256,7 @@
 				5A3ED7EF2A5230E900DB04B1 /* NewsSourceViewController.swift */,
 				5A3ED8022A523D4400DB04B1 /* NewsSearchViewController.swift */,
 				5A3ED8242A52529C00DB04B1 /* DFSafariViewController.swift */,
+				5A3ED8292A5254C100DB04B1 /* BookmarkViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -290,6 +297,8 @@
 				5AD3A2042A521E7F001E4CDD /* DailyNewsItemCell.xib */,
 				5A3ED7F32A52366100DB04B1 /* DailySourceItemCell.swift */,
 				5A3ED7F12A52364F00DB04B1 /* DailySourceItemCell.xib */,
+				5A3ED82D2A52564900DB04B1 /* BookmarkItemsCell.swift */,
+				5A3ED82B2A52563100DB04B1 /* BookmarkItemsCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -382,6 +391,7 @@
 				5AD3A2052A521E7F001E4CDD /* DailyNewsItemCell.xib in Resources */,
 				5AD3A19F2A51DB5B001E4CDD /* Assets.xcassets in Resources */,
 				5A3ED7F22A52364F00DB04B1 /* DailySourceItemCell.xib in Resources */,
+				5A3ED82C2A52563100DB04B1 /* BookmarkItemsCell.xib in Resources */,
 				5AD3A1CE2A51EFE2001E4CDD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,7 +475,9 @@
 				5AD3A1E52A51FBC4001E4CDD /* Serializable.swift in Sources */,
 				5A3ED7F42A52366100DB04B1 /* DailySourceItemCell.swift in Sources */,
 				5AD3A2002A521713001E4CDD /* R.generated.swift in Sources */,
+				5A3ED82E2A52564900DB04B1 /* BookmarkItemsCell.swift in Sources */,
 				5AD3A1F12A5210BB001E4CDD /* RaveImageView.swift in Sources */,
+				5A3ED82A2A5254C100DB04B1 /* BookmarkViewController.swift in Sources */,
 				5A3ED7FE2A52376F00DB04B1 /* PullToReachTarget.swift in Sources */,
 				5A3ED7FD2A52376F00DB04B1 /* UIView+Helper.swift in Sources */,
 				5AD3A1E82A520662001E4CDD /* DailyNewsController.swift in Sources */,
