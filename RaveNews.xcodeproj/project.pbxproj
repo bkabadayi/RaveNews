@@ -21,9 +21,9 @@
 		5A3ED82A2A5254C100DB04B1 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED8292A5254C100DB04B1 /* BookmarkViewController.swift */; };
 		5A3ED82C2A52563100DB04B1 /* BookmarkItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A3ED82B2A52563100DB04B1 /* BookmarkItemsCell.xib */; };
 		5A3ED82E2A52564900DB04B1 /* BookmarkItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3ED82D2A52564900DB04B1 /* BookmarkItemsCell.swift */; };
-		5A3ED8302A525B7400DB04B1 /* LottieIconTransitions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A3ED82F2A525B7400DB04B1 /* LottieIconTransitions.json */; };
+		5A3ED8342A52660000DB04B1 /* LottieIconTransitions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A3ED8322A52660000DB04B1 /* LottieIconTransitions.json */; };
+		5A3ED8352A52660000DB04B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A3ED8332A52660000DB04B1 /* Assets.xcassets */; };
 		5AD3A1962A51DB5A001E4CDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */; };
-		5AD3A19F2A51DB5B001E4CDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */; };
 		5AD3A1B92A51E009001E4CDD /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD3A1B82A51E009001E4CDD /* PromiseKit */; };
 		5AD3A1BC2A51E028001E4CDD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD3A1BB2A51E028001E4CDD /* Kingfisher */; };
 		5AD3A1BF2A51E047001E4CDD /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD3A1BE2A51E047001E4CDD /* DZNEmptyDataSet */; };
@@ -71,10 +71,10 @@
 		5A3ED8292A5254C100DB04B1 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		5A3ED82B2A52563100DB04B1 /* BookmarkItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkItemsCell.xib; sourceTree = "<group>"; };
 		5A3ED82D2A52564900DB04B1 /* BookmarkItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkItemsCell.swift; sourceTree = "<group>"; };
-		5A3ED82F2A525B7400DB04B1 /* LottieIconTransitions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieIconTransitions.json; sourceTree = "<group>"; };
+		5A3ED8322A52660000DB04B1 /* LottieIconTransitions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieIconTransitions.json; sourceTree = "<group>"; };
+		5A3ED8332A52660000DB04B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AD3A1922A51DB5A001E4CDD /* RaveNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD3A1952A51DB5A001E4CDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AD3A1A32A51DB5B001E4CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD3A1CB2A51EFE2001E4CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5AD3A1CD2A51EFE2001E4CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +149,15 @@
 			path = Activities;
 			sourceTree = "<group>";
 		};
+		5A3ED8312A52660000DB04B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5A3ED8332A52660000DB04B1 /* Assets.xcassets */,
+				5A3ED8322A52660000DB04B1 /* LottieIconTransitions.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		5AD3A1892A51DB5A001E4CDD = {
 			isa = PBXGroup;
 			children = (
@@ -170,18 +179,17 @@
 		5AD3A1942A51DB5A001E4CDD /* RaveNews */ = {
 			isa = PBXGroup;
 			children = (
-				5A3ED8262A5253DB00DB04B1 /* Activities */,
-				5AD3A1F42A52144A001E4CDD /* Network */,
+				5AD3A1C82A51EDFD001E4CDD /* Delegate */,
 				5AD3A1E92A520760001E4CDD /* Extensions */,
-				5AD3A1E62A52065E001E4CDD /* Controllers */,
 				5AD3A1E32A51FBB2001E4CDD /* Protocols */,
 				5AD3A1DA2A51F467001E4CDD /* Models */,
-				5AD3A1C82A51EDFD001E4CDD /* Delegate */,
 				5AD3A1C92A51EE65001E4CDD /* Storyboards */,
 				5AD3A1B02A51DCF5001E4CDD /* Views */,
+				5A3ED8262A5253DB00DB04B1 /* Activities */,
+				5AD3A1E62A52065E001E4CDD /* Controllers */,
+				5AD3A1F42A52144A001E4CDD /* Network */,
 				5AD3A1D72A51F3B6001E4CDD /* Helpers */,
-				5A3ED82F2A525B7400DB04B1 /* LottieIconTransitions.json */,
-				5AD3A19E2A51DB5B001E4CDD /* Assets.xcassets */,
+				5A3ED8312A52660000DB04B1 /* Resources */,
 				5AD3A1A32A51DB5B001E4CDD /* Info.plist */,
 			);
 			path = RaveNews;
@@ -392,9 +400,9 @@
 			files = (
 				5AD3A1CF2A51EFE2001E4CDD /* Main.storyboard in Resources */,
 				5AD3A2052A521E7F001E4CDD /* DailyNewsItemCell.xib in Resources */,
-				5AD3A19F2A51DB5B001E4CDD /* Assets.xcassets in Resources */,
+				5A3ED8342A52660000DB04B1 /* LottieIconTransitions.json in Resources */,
 				5A3ED7F22A52364F00DB04B1 /* DailySourceItemCell.xib in Resources */,
-				5A3ED8302A525B7400DB04B1 /* LottieIconTransitions.json in Resources */,
+				5A3ED8352A52660000DB04B1 /* Assets.xcassets in Resources */,
 				5A3ED82C2A52563100DB04B1 /* BookmarkItemsCell.xib in Resources */,
 				5AD3A1CE2A51EFE2001E4CDD /* LaunchScreen.storyboard in Resources */,
 			);
