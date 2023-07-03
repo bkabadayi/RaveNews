@@ -59,7 +59,7 @@ class NewsDetailViewController: UIViewController, SFSafariViewControllerDelegate
         }
     }
 
-    @IBOutlet weak var backButton: UIButton! {
+    @IBOutlet private weak var backButton: UIButton! {
         didSet {
             backButton.layer.shadowColor = UIColor.black.cgColor
             backButton.layer.shadowRadius = 2.0
@@ -69,7 +69,7 @@ class NewsDetailViewController: UIViewController, SFSafariViewControllerDelegate
         }
     }
 
-    @IBOutlet weak var shareButton: UIButton! {
+    @IBOutlet private weak var shareButton: UIButton! {
         didSet {
             shareButton.layer.shadowColor = UIColor.black.cgColor
             shareButton.layer.shadowRadius = 2.0
@@ -189,10 +189,46 @@ class NewsDetailViewController: UIViewController, SFSafariViewControllerDelegate
     
     @IBAction private func shareArticle(_ sender: UIButton) {
         fadeUIElements(with: 0.0)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.11) {
+            
+            guard let shareURL = self.articleStringURL,
+                  let articleImage = self.captureScreenShot(),
+                  let articleToBookmarkData = self.receivedNewsItem else { return }
+            
+            let bookmarkActivity = BookmarkActivity()
+            
+            bookmarkActivity.bookMarkSuccessful = {
+                self.showErrorWithDelay("Bookmarked Successfully!")
+            }
+            
+            let activityVC = UIActivityViewController(activityItems: [shareURL, articleImage, articleToBookmarkData],
+                                                      applicationActivities: [bookmarkActivity])
+            
+            activityVC.excludedActivityTypes = [.saveToCameraRoll,
+                                                .copyToPasteboard,
+                                                .airDrop,
+                                                .addToReadingList,
+                                                .assignToContact,
+                                                .postToTencentWeibo,
+                                                .postToVimeo,
+                                                .print,
+                                                .postToWeibo]
+            
+            activityVC.completionWithItemsHandler = { [weak self] (_, _, _, _) in
+                guard let self else { return }
+                
+                self.fadeUIElements(with: 1.0)
+            }
+        }
     }
 
     @IBAction private func openArticleInSafari(_ sender: UIButton) {
+        guard let articleString = articleStringURL, let url = URL(string: articleString) else { return }
         
+        let svc = DFSafariViewController(url: url)
+        svc.delegate = self
+        self.present(svc, animated: true, completion: nil)
     }
 }
 

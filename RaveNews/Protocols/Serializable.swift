@@ -19,6 +19,6 @@ extension Serializable {
     
     func deserialize(data: Data) throws -> Self {
         let decoder = JSONDecoder()
-       return try decoder.decode(Self.self, from: data)
+        return try decoder.decode(Self.self, from: data)
     }
 }

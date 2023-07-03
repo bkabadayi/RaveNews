@@ -136,11 +136,12 @@ class NewsSearchViewController: UIViewController {
         if segue.identifier == R.segue.newsSearchViewController.newsSearchSegue.identifier {
             if let vc = segue.destination as? NewsDetailViewController {
                 guard let cell = sender as? UICollectionViewCell else { return }
-                guard let indexpath = self.searchCollectionView?.indexPath(for: cell) else { return }
+                guard let indexPath = self.searchCollectionView?.indexPath(for: cell) else { return }
+                
                 selectedCell = cell
-                vc.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
-                vc.receivedNewsItem = DailyNewsRealmModel.toDailyNewsRealmModel(from: searchItems[indexpath.row])
-                vc.receivedItemNumber = indexpath.row + 1
+                vc.modalPresentationStyle = .fullScreen
+                vc.receivedNewsItem = DailyNewsRealmModel.toDailyNewsRealmModel(from: searchItems[indexPath.row])
+                vc.receivedItemNumber = indexPath.row + 1
             }
         }
     }

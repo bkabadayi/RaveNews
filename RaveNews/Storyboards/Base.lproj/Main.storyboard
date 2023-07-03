@@ -293,16 +293,16 @@
             </objects>
             <point key="canvasLocation" x="503" y="435"/>
         </scene>
-        <!--Sources-->
+        <!--NewsSourceViewController-->
         <scene sceneID="coH-vu-UYS">
             <objects>
-                <viewController storyboardIdentifier="NewsSourceViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yRo-cy-JI3" customClass="NewsSourceViewController" customModule="RaveNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsSourceViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yRo-cy-JI3" userLabel="NewsSourceViewController" customClass="NewsSourceViewController" customModule="RaveNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OdK-Mj-hep">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jaw-oV-OrD">
-                                <rect key="frame" x="0.0" y="56" width="320" height="492"/>
+                                <rect key="frame" x="0.0" y="104.5" width="320" height="443.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SourceCell" rowHeight="60" id="Z82-NM-xup">
@@ -372,7 +372,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="yRo-cy-JI3" kind="relationship" relationship="rootViewController" id="HnI-0c-0W4"/>
+                        <segue destination="yRo-cy-JI3" kind="relationship" relationship="rootViewController" id="CUL-VF-4OW"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TsO-d4-tEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
